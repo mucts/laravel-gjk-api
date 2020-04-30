@@ -56,9 +56,9 @@ class Sign
             }
         }
         $linkString = substr($linkString, 0, strlen($linkString) - 1);
-        if (get_magic_quotes_gpc()) {
+        /*if (get_magic_quotes_gpc()) {
             $linkString = stripcslashes($linkString);
-        }
+        }*/
         return $linkString;
     }
 }
