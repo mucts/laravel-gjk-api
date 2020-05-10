@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MuCTS\\LaravelGuiJkAPI\\": "src/"
+            "MuCTS\\Laravel\\GuiJK\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MuCTS\\LaravelGuiJkAPI\\GjkServiceProvider"
+                "MuCTS\\Laravel\\GuiJK\\GjkServiceProvider"
             ]
         }
     },

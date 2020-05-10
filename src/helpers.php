@@ -1,6 +1,6 @@
 <?php
 
-use MuCTS\LaravelGuiJkAPI\Sign;
+use MuCTS\Laravel\GuiJK\Sign;
 
 if (!function_exists('gjk_request')) {
     /**

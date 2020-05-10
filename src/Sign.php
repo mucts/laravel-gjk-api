@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MuCTS\LaravelGuiJkAPI;
+namespace MuCTS\Laravel\GuiJK;
 
 
 class Sign
