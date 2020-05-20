@@ -2,6 +2,7 @@
     "name": "mucts/laravel-gjk-api",
     "description": "GuiJK API Request",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": ">=7.2",
         "ext-json": "*",
