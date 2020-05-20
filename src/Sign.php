@@ -30,8 +30,8 @@ trait Sign
      */
     public function generateSign(array $param, string $secretKey)
     {
-        self::_dictSort($param);
-        return strtoupper(md5(self::_createLinkString($param) . '&key=' . $secretKey));
+        $this->_dictSort($param);
+        return strtoupper(md5($this->_createLinkString($param) . '&key=' . $secretKey));
     }
 
     /**
@@ -39,7 +39,7 @@ trait Sign
      *
      * @param array $param 待排序参数
      */
-    private static function _dictSort(array &$param)
+    private  function _dictSort(array &$param)
     {
         ksort($param);
         reset($param);
@@ -50,7 +50,7 @@ trait Sign
      * @param array $param 带拼接数组
      * @return string
      */
-    private static function _createLinkString(array $param = [])
+    private  function _createLinkString(array $param = [])
     {
         $linkString = "";
         foreach ($param as $key => $value) {
