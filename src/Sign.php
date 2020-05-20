@@ -53,12 +53,10 @@ trait Sign
     private static function _createLinkString(array $param = [])
     {
         $linkString = "";
-        if (is_array($param)) {
-            foreach ($param as $key => $value) {
-                if (is_null($value) || $value === "" || $key === "sign" || $key == "sign_type") continue;
-                $value = is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value;
-                $linkString .= "{$key}={$value}&";
-            }
+        foreach ($param as $key => $value) {
+            if (is_null($value) || $value === "" || $key === "sign" || $key == "sign_type") continue;
+            $value = is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value;
+            $linkString .= "{$key}={$value}&";
         }
         $linkString = substr($linkString, 0, strlen($linkString) - 1);
         return $linkString;
