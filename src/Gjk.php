@@ -42,7 +42,12 @@ class Gjk
      */
     public function setConfig(Config $config): self
     {
-        $rules = ['url' => 'required|active_url', 'app_id' => 'required|int', 'secret_key' => 'required|string', 'version' => 'required|int'];
+        $rules = [
+            'url' => 'required|active_url',
+            'app_id' => 'required|int',
+            'secret_key' => 'required|string',
+            'version' => 'required|int'
+        ];
         $validator = validator($config->all(), [$rules]);
         if ($validator->fails()) {
             throw new InvalidArgumentException('Please set the correct configuration，error:' . $validator->errors());
