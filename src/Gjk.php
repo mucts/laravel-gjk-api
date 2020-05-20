@@ -47,7 +47,7 @@ class Gjk
         if ($validator->fails()) {
             throw new InvalidArgumentException('Please set the correct configuration，error:' . $validator->errors());
         }
-        $this->config = new Config();
+        $this->config = $config;
         return $this;
     }
 
