@@ -4,27 +4,31 @@
 namespace MuCTS\Laravel\GuiJK;
 
 
-class Sign
+use Illuminate\Support\Arr;
+
+trait Sign
 {
     /**
      * 校验签名
      *
      * @param array $param
+     * @param string $secretKey
      * @return bool
      */
-    public static function verifySign(array $param)
+    public function verifySign(array $param, string $secretKey)
     {
-        return self::makeSign($param) == @$param['sign'];
+        return $this->generateSign($param, $secretKey) === Arr::get($param, 'sign');
     }
 
     /**
      * 签名
+     *
      * @param array $param
      * @param string $secretKey
      * @return string
      * @author herry.yao<yao.yuandeng@qianka.com>
      */
-    public static function makeSign(array $param, $secretKey)
+    public function generateSign(array $param, string $secretKey)
     {
         self::_dictSort($param);
         return strtoupper(md5(self::_createLinkString($param) . '&key=' . $secretKey));
@@ -32,6 +36,7 @@ class Sign
 
     /**
      * 字典排序
+     *
      * @param array $param 待排序参数
      */
     private static function _dictSort(array &$param)
@@ -56,9 +61,6 @@ class Sign
             }
         }
         $linkString = substr($linkString, 0, strlen($linkString) - 1);
-        /*if (get_magic_quotes_gpc()) {
-            $linkString = stripcslashes($linkString);
-        }*/
         return $linkString;
     }
 }
