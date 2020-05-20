@@ -16,3 +16,22 @@ if (!function_exists('gjk_request')) {
         return Gjk::request($route, $params, $timeOut);
     }
 }
+
+if (!function_exists("str_random")) {
+    /**
+     * string random
+     * @param int $length
+     * @return string
+     * @throws Exception
+     */
+    function str_random(int $length)
+    {
+        $string = '';
+        while (($len = strlen($string)) < $length) {
+            $size = $length - $len;
+            $bytes = random_bytes($size);
+            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+        }
+        return $string;
+    }
+}
