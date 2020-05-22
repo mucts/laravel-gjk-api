@@ -53,7 +53,7 @@ trait Sign
     private function _createLinkString(array $param = [])
     {
         return collect($param)->filter(function ($value, $key) {
-            return !is_null($value) && $value !== '' && !Arr::exists(['sign', 'sign_type'], $key);
+            return !is_null($value) && $value !== '' && !in_array($key, ['sign', 'sign_type']);
         })->map(function ($value, $key) {
             return sprintf('%s=%s', $key,
                 is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value);
