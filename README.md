@@ -1,14 +1,15 @@
-# laravel-gjk-api
+<p align="center"><img src="https://images.mucts.com/image/mcts.png" width="400"></p>
+<p align="center">
+    <a href="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api"><img src="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/build.png" alt="Build Status"></a>
+    <a href="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api"><img src="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/code-intelligence.svg" alt="Code Intelligence Status"></a>
+    <a href="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api"><img src="https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/quality-score.png" alt="Scrutinizer Code Quality"></a>
+    <a href="https://packagist.org/packages/mucts/laravel-gjk-api"><img src="https://poser.pugx.org/mucts/laravel-gjk-api/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/mucts/laravel-gjk-api"><img src="https://poser.pugx.org/mucts/laravel-gjk-api/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/mucts/laravel-gjk-api"><img src="https://poser.pugx.org/mucts/laravel-gjk-api/license.svg" alt="License"></a>
+</p>
+
+# Laravel gjk api
 贵健康API接口请求SDK
-
-
-[![Build Status](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/build.png)](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/code-intelligence.svg)](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api/badges/quality-score.png)](https://scrutinizer-ci.com/g/mucts/laravel-gjk-api)
-[![Latest Stable Version](https://poser.pugx.org/mucts/laravel-gjk-api/v/stable.svg)](https://packagist.org/packages/mucts/laravel-gjk-api) 
-[![Total Downloads](https://poser.pugx.org/mucts/laravel-gjk-api/downloads.svg)](https://packagist.org/packages/mucts/laravel-gjk-api) 
-[![Latest Unstable Version](https://poser.pugx.org/mucts/laravel-gjk-api/v/unstable.svg)](https://packagist.org/packages/mucts/laravel-gjk-api) 
-[![License](https://poser.pugx.org/mucts/laravel-gjk-api/license.svg)](https://packagist.org/packages/mucts/laravel-gjk-api)
 
 ## Installation
 
