@@ -15,6 +15,7 @@ namespace MuCTS\Laravel\GuiJK;
 
 use Exception;
 use Illuminate\Support\Arr;
+use JetBrains\PhpStorm\ArrayShape;
 use MuCTS\Laravel\GuiJK\Config\Config;
 use MuCTS\Laravel\GuiJK\Exceptions\InvalidArgumentException;
 use MuCTS\Laravel\GuiJK\Exceptions\Exception as GjkException;
@@ -26,7 +27,7 @@ class Gjk
     use Sign;
 
     /** @var Config */
-    private $config;
+    private Config $config;
 
     public function __construct(?array $config)
     {
@@ -42,11 +43,11 @@ class Gjk
      */
     public function setConfig(Config $config): self
     {
-        $rules = [
-            'url' => 'required|active_url',
-            'app_id' => 'required|int',
+        $rules     = [
+            'url'        => 'required|active_url',
+            'app_id'     => 'required|int',
             'secret_key' => 'required|string',
-            'version' => 'required|int'
+            'version'    => 'required|int'
         ];
         $validator = validator($config->all(), [$rules]);
         if ($validator->fails()) {
@@ -59,7 +60,7 @@ class Gjk
     /**
      * Get GuiJk Server API request url
      *
-     * @return string|null
+     * @return string
      */
     protected function getUrl(): string
     {
@@ -82,11 +83,11 @@ class Gjk
      * @return array
      * @throws Exception
      */
-    protected function getBasicParams(): array
+    #[ArrayShape(["app_id" => "mixed", "c_ver" => "mixed", "nonce_str" => "string"])] protected function getBasicParams(): array
     {
         return [
-            "app_id" => $this->config->get('app_id'),
-            "c_ver" => $this->config->get('version'),
+            "app_id"    => $this->config->get('app_id'),
+            "c_ver"     => $this->config->get('version'),
             "nonce_str" => str_random(mt_rand(6, 32))
         ];
     }
@@ -98,6 +99,8 @@ class Gjk
      * @param array $param
      * @param int $timeOut
      * @return array|null
+     * @throws GjkException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws Exception
      */
     public function request(string $route, array $param = [], $timeOut = 15): ?array
@@ -105,7 +108,7 @@ class Gjk
         $param = ['user_id' => Arr::pull($param, 'user_id', mt_rand(1000000, 3000000))]
             + $this->getBasicParams() + $param;
         Arr::set($param, 'sign', $this->generateSign($param, $this->getSecretKey()));
-        $client = new Client(["headers" => [], "timeout" => $timeOut]);
+        $client  = new Client(["headers" => [], "timeout" => $timeOut]);
         $options = ['json' => $param];
         try {
             $response = $client->request('POST', rtrim($this->getUrl(), '/') . '/' . ltrim($route, '/'), $options);

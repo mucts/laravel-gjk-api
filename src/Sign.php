@@ -15,7 +15,7 @@ trait Sign
      * @param string $secretKey
      * @return bool
      */
-    public function verifySign(array $param, string $secretKey)
+    public function verifySign(array $param, string $secretKey): bool
     {
         return $this->generateSign($param, $secretKey) === Arr::get($param, 'sign');
     }
@@ -28,7 +28,7 @@ trait Sign
      * @return string
      * @author herry.yao<yao.yuandeng@qianka.com>
      */
-    public function generateSign(array $param, string $secretKey)
+    public function generateSign(array $param, string $secretKey): string
     {
         $this->_dictSort($param);
         return strtoupper(md5($this->_createLinkString($param) . '&key=' . $secretKey));
@@ -50,7 +50,7 @@ trait Sign
      * @param array $param 带拼接数组
      * @return string
      */
-    private function _createLinkString(array $param = [])
+    private function _createLinkString(array $param = []): string
     {
         return collect($param)->filter(function ($value, $key) {
             return !is_null($value) && $value !== '' && !in_array($key, ['sign', 'sign_type']);

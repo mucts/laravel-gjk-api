@@ -25,7 +25,7 @@ use MuCTS\Laravel\GuiJK\Config\Config;
  */
 class Gjk extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'gjk';
     }

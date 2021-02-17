@@ -29,7 +29,7 @@ class ServiceProvider extends Provider implements DeferrableProvider
         }
     }
 
-    public function provides()
+    public function provides(): array
     {
         return ['gjk', Gjk::class];
     }
