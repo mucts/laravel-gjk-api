@@ -110,14 +110,14 @@ class Gjk
         Arr::set($param, 'sign', $this->generateSign($param, $this->getSecretKey()));
         $client  = new Client(["headers" => [], "timeout" => $timeOut]);
         $options = ['json' => $param];
-        Log::channel('gjk_request')->info('贵健康接口请求开始', ['route' => $route, 'param' => $param, 'timeout' => $timeOut]);
+        Log::channel('request')->info('贵健康接口请求开始', ['route' => $route, 'param' => $param, 'timeout' => $timeOut]);
         try {
             $response = $client->request('POST', rtrim($this->getUrl(), '/') . '/' . ltrim($route, '/'), $options);
         } catch (Exception | GuzzleException $exception) {
             throw new GjkException($exception->getMessage(), $exception->getCode(), $exception->getPrevious());
         }
         $response = $response?->getBody()->getContents();
-        Log::channel('gjk_request')->info('贵健康接口请求响应', ['rst' => $response]);
+        Log::channel('request')->info('贵健康接口请求响应', ['rst' => $response]);
         return $response ? json_decode($response, true) : null;
     }
 }
