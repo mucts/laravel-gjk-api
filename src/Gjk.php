@@ -14,13 +14,14 @@ namespace MuCTS\Laravel\GuiJK;
 
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use JetBrains\PhpStorm\ArrayShape;
 use MuCTS\Laravel\GuiJK\Config\Config;
 use MuCTS\Laravel\GuiJK\Exceptions\InvalidArgumentException;
 use MuCTS\Laravel\GuiJK\Exceptions\Exception as GjkException;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 
 class Gjk
 {
@@ -100,24 +101,23 @@ class Gjk
      * @param int $timeOut
      * @return array|null
      * @throws GjkException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws Exception
      */
-    public function request(string $route, array $param = [], $timeOut = 15): ?array
+    public function request(string $route, array $param = [], int $timeOut = 15): ?array
     {
         $param = ['user_id' => Arr::pull($param, 'user_id', mt_rand(1000000, 3000000))]
             + $this->getBasicParams() + $param;
         Arr::set($param, 'sign', $this->generateSign($param, $this->getSecretKey()));
         $client  = new Client(["headers" => [], "timeout" => $timeOut]);
         $options = ['json' => $param];
+        Log::channel('gjk_request')->info('贵健康接口请求开始', ['route' => $route, 'param' => $param, 'timeout' => $timeOut]);
         try {
             $response = $client->request('POST', rtrim($this->getUrl(), '/') . '/' . ltrim($route, '/'), $options);
-        } catch (RequestException $exception) {
-            $response = $exception->getResponse();
-        } catch (Exception $exception) {
+        } catch (Exception | GuzzleException $exception) {
             throw new GjkException($exception->getMessage(), $exception->getCode(), $exception->getPrevious());
         }
-        $response = $response ? $response->getBody() : null;
+        $response = $response?->getBody()->getContents();
+        Log::channel('gjk_request')->info('贵健康接口请求响应', ['rst' => $response]);
         return $response ? json_decode($response, true) : null;
     }
 }
